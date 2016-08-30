@@ -20,8 +20,9 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
      or constructed as part of adding a new meal.
      */
     var symbol: Symbol?
+    var imageEdited = false
     
-    var delegate: SymbolViewControllerDelegate?
+    //var delegate: SymbolViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             mainKeywordTextField.text = symbol.mainKeyword
             imageView.image = symbol.image
         }
+        imageView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        imageView.layer.borderWidth = 2
         
         checkValidSymbolMainKeyword()
     }
@@ -66,23 +69,6 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         navigationItem.title = mainKeywordTextField.text
     }
     
-    // MARK: UIImagePickerControllerDelegate
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        // Dismiss the picker if the user canceled.
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        // Set photoImageView to display the selected image.
-        imageView.image = selectedImage
-        
-        // Dismiss the picker.
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     // MARK: Navigation
     
     @IBAction func cancel(sender: UIBarButtonItem) {
@@ -112,51 +98,21 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
             let navController = segue.destinationViewController as! UINavigationController
             let drawController = navController.topViewController as! SymbolDrawViewController
-            drawController.image = imageView.image!
+            if let image = symbol?.image {
+                drawController.image = image
+            } else if imageEdited {
+                drawController.image = imageView.image
+            }
         }
     }
     
-
-
-    // MARK: Actions
-    /*
-    @IBAction func goToDrawSymbol(sender: UITapGestureRecognizer) {
-        print("Tap gesture recognized")
-        mainKeywordTextField.resignFirstResponder()
-        let symbolDrawViewController = SymbolDrawViewController()
-        symbolDrawViewController.image = symbol?.image
-        // symbolDrawViewController.delegate = self
-        presentViewController(symbolDrawViewController, animated: true, completion: nil)
-
-    }*/
-    
-    
-    
-    // Later should change this to able to edit image (using an image editor)
-    /*
-    @IBAction func selectImageFromLibrary(sender: UITapGestureRecognizer) {
-        
-        print("Tap gesture recognized")
-        // Hide the keboard.
-        mainKeywordTextField.resignFirstResponder()
-
-        // UIImagePickerCotroller is a view controller that lets a user pick media from their photo library.
-        let imagePickerController = UIImagePickerController()
-        
-        // TODO: This will change later
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
+    @IBAction func unwindToSymbolView(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? SymbolDrawViewController, image = sourceViewController.image {
+            imageView.image = image
+            imageEdited = true
+        }
     }
-    
-    @IBAction func saveSymbol(sender: UIButton) {
-        
-    }
- */
+
 }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E22A1D0C1D752D7F008835F7 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A1D0B1D752D7F008835F7 /* ColorControl.swift */; };
 		E2A2AC401D6DA2310054E50E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A2AC3F1D6DA2310054E50E /* AppDelegate.swift */; };
 		E2A2AC421D6DA2310054E50E /* SymbolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A2AC411D6DA2310054E50E /* SymbolViewController.swift */; };
 		E2A2AC451D6DA2310054E50E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A2AC431D6DA2310054E50E /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E22A1D0B1D752D7F008835F7 /* ColorControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
 		E2A2AC3C1D6DA2310054E50E /* SymbolLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymbolLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A2AC3F1D6DA2310054E50E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2A2AC411D6DA2310054E50E /* SymbolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				E2A2AC671D6FB5710054E50E /* SymbolTableViewCell.swift */,
 				E2A2AC691D6FC5F60054E50E /* SymbolTableViewController.swift */,
 				E2A2AC6B1D7022B10054E50E /* SymbolDrawViewController.swift */,
+				E22A1D0B1D752D7F008835F7 /* ColorControl.swift */,
 				E2A2AC641D6E7BF00054E50E /* Symbol.swift */,
 				E2A2AC491D6DA2310054E50E /* Assets.xcassets */,
 				E2A2AC4B1D6DA2310054E50E /* LaunchScreen.storyboard */,
@@ -219,6 +222,7 @@
 				E2A2AC481D6DA2310054E50E /* SymbolLog.xcdatamodeld in Sources */,
 				E2A2AC6C1D7022B10054E50E /* SymbolDrawViewController.swift in Sources */,
 				E2A2AC6A1D6FC5F60054E50E /* SymbolTableViewController.swift in Sources */,
+				E22A1D0C1D752D7F008835F7 /* ColorControl.swift in Sources */,
 				E2A2AC681D6FB5710054E50E /* SymbolTableViewCell.swift in Sources */,
 				E2A2AC401D6DA2310054E50E /* AppDelegate.swift in Sources */,
 			);

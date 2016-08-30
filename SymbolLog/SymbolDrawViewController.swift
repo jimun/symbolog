@@ -8,14 +8,12 @@
 
 import UIKit
 
-class SymbolDrawViewController: UIViewController, UINavigationControllerDelegate {
+class SymbolDrawViewController: UIViewController {
 
     // MARK: Properties
     var lastPoint = CGPoint.zero
-    var red: CGFloat = 0.0
-    var green: CGFloat = 0.0
-    var blue: CGFloat = 0.0
-    var brushWidth: CGFloat = 10.0
+    var selectedColor: CGColor = UIColor.blackColor().CGColor
+    var brushWidth: CGFloat = 15.0
     var opacity: CGFloat = 1.0
     var swiped = false
     
@@ -24,25 +22,12 @@ class SymbolDrawViewController: UIViewController, UINavigationControllerDelegate
     
     var image: UIImage? // At this point, either there's a symbol with image saved already, or no symbol nor image, and we are in the process of making one
     
-    let colors: [(CGFloat, CGFloat, CGFloat)] = [
-        (0, 0, 0),
-        (105.0 / 255.0, 105.0 / 255.0, 105.0 / 255.0),
-        (1.0, 0, 0),
-        (0, 0, 1.0),
-        (51.0 / 255.0, 204.0 / 255.0, 1.0),
-        (102.0 / 255.0, 204.0 / 255.0, 0),
-        (102.0 / 255.0, 1.0, 0),
-        (160.0 / 255.0, 82.0 / 255.0, 45.0 / 255.0),
-        (1.0, 102.0 / 255.0, 0),
-        (1.0, 1.0, 0),
-        (1.0, 1.0, 1.0),
-        ]
-    
-    
     // MARK: IBOutlet
     
     @IBOutlet weak var tempImageView: UIImageView!
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var colorControl: ColorControl!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +35,10 @@ class SymbolDrawViewController: UIViewController, UINavigationControllerDelegate
         createBlankCanvase()
         if let image = image {
             mainImageView.image = image
-            
         }
+        selectedColor = colorControl.currentColor.CGColor
+        colorControl.symbolDrawViewController = self
     }
-    
-    
     
     func createBlankCanvase() {
         let rect = CGRectMake(0.0, 0.0, 300.0, 150.0)
@@ -100,7 +84,6 @@ class SymbolDrawViewController: UIViewController, UINavigationControllerDelegate
             let context = UIGraphicsGetCurrentContext()
             tempImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: tempImageView.frame.size.width, height: tempImageView.frame.size.height))
             
-            print(adjustedFromPoint)
             
             
             // 2 - draw a line
@@ -110,7 +93,8 @@ class SymbolDrawViewController: UIViewController, UINavigationControllerDelegate
             // 3 - parameters for brush size and opacity and brush stroke
             CGContextSetLineCap(context, CGLineCap.Round)
             CGContextSetLineWidth(context, brushWidth)
-            CGContextSetRGBStrokeColor(context, red, green, blue, 1.0)
+            CGContextSetStrokeColorWithColor(context, selectedColor)
+            //CGContextSetRGBStrokeColor(context, red, green, blue, 1.0)
             CGContextSetBlendMode(context, CGBlendMode.Normal)
             
             // 4 - Where actually draw the path
@@ -153,66 +137,35 @@ class SymbolDrawViewController: UIViewController, UINavigationControllerDelegate
         tempImageView.image = nil
     }
     
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let settingsViewController = segue.destinationViewController as! SettingsViewController
-        settingsViewController.delegate = self
-        settingsViewController.brush = brushWidth
-        settingsViewController.opacity = opacity
-        settingsViewController.red = red
-        settingsViewController.green = green
-        settingsViewController.blue = blue
-    }*/
-    
     
     // MARK: - Actions
     @IBAction func reset(sender: UIButton) {
         createBlankCanvase()
     }
     
-    /*
-    @IBAction func share(sender: AnyObject) {
-        UIGraphicsBeginImageContext(mainImageView.bounds.size)
-        mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
-            width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        let activity = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        presentViewController(activity, animated: true, completion: nil)
-    }
-    
-    @IBAction func pencilPressed(sender: AnyObject) {
-        // 1
-        var index = sender.tag ?? 0
-        if index < 0 || index >= colors.count {
-            index = 0
-        }
-        
-        // 2
-        (red, green, blue) = colors[index]
-        
-        // 3
-        if index == colors.count - 1 {
-            opacity = 1.0
-        }
-    }*/
-
-    
-
-
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
-    */
+    
+
+    // This method lets you configure a view controller before it's presented.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if saveButton === sender {
+            image = mainImageView.image
+        }
+    }
+    
 
 }
 
-protocol SymbolViewControllerDelegate {
-    func imageSaved(controller: SymbolViewController)
+protocol ColorControlDelegate {
+    func colorTapped(color: CGColor)
 }
+
+/*class colorPickerDelegate: ColorControlDelegate {
+    func colorTapped(color:CGColor) {
+        
+    }
+}*/
