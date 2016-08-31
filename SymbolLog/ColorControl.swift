@@ -17,11 +17,15 @@ class ColorControl: UIView {
         UIColor.blackColor(),
         UIColor.redColor(),
         UIColor.orangeColor(),
-        UIColor.magentaColor(),
         UIColor.yellowColor(),
         UIColor.greenColor(),
         UIColor.cyanColor(),
+        UIColor.init(red: 57.0 / 255.0, green: 150.0 / 255.0, blue: 210.0 / 255.0, alpha: 1.0), // Medium Blue
         UIColor.blueColor(),
+        UIColor.init(red: 0.0, green: 25.0 / 255.0, blue: 180.0 / 255.0, alpha: 1.0), // Dark Blue
+        UIColor.magentaColor(),
+        UIColor.init(red: 180.0 / 255.0, green: 0.0, blue: 123.0 / 255.0, alpha: 1.0), // Fuschia-ish
+        UIColor.init(red: 160.0 / 255.0, green: 2.0 / 255.0, blue: 160.0 / 255.0, alpha: 1.0), // Darker Pink
         UIColor.purpleColor()
     ]
     var selectedButtonIndex = 0
@@ -66,7 +70,7 @@ class ColorControl: UIView {
     }
     
     override func intrinsicContentSize() -> CGSize {
-        return CGSize(width: areaWidth, height: size * 2)
+        return CGSize(width: areaWidth, height: size * 4)
     }
     
     

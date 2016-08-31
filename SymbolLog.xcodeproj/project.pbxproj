@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		E22A1D0B1D752D7F008835F7 /* ColorControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
-		E2A2AC3C1D6DA2310054E50E /* Symbolog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Symbolog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2A2AC3C1D6DA2310054E50E /* SymbolLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymbolLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A2AC3F1D6DA2310054E50E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2A2AC411D6DA2310054E50E /* SymbolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViewController.swift; sourceTree = "<group>"; };
 		E2A2AC441D6DA2310054E50E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		E2A2AC491D6DA2310054E50E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2A2AC4C1D6DA2310054E50E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2A2AC4E1D6DA2310054E50E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2A2AC531D6DA2310054E50E /* Symbolog.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Symbolog.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2A2AC531D6DA2310054E50E /* SymbolLog.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SymbolLog.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A2AC571D6DA2310054E50E /* SymbolLogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolLogTests.swift; sourceTree = "<group>"; };
 		E2A2AC591D6DA2310054E50E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A2AC641D6E7BF00054E50E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
@@ -81,8 +81,8 @@
 		E2A2AC3D1D6DA2310054E50E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E2A2AC3C1D6DA2310054E50E /* Symbolog.app */,
-				E2A2AC531D6DA2310054E50E /* Symbolog.xctest */,
+				E2A2AC3C1D6DA2310054E50E /* SymbolLog.app */,
+				E2A2AC531D6DA2310054E50E /* SymbolLog.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E2A2AC3B1D6DA2310054E50E /* Symbolog */ = {
+		E2A2AC3B1D6DA2310054E50E /* SymbolLog */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E2A2AC5C1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "Symbolog" */;
+			buildConfigurationList = E2A2AC5C1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "SymbolLog" */;
 			buildPhases = (
 				E2A2AC381D6DA2310054E50E /* Sources */,
 				E2A2AC391D6DA2310054E50E /* Frameworks */,
@@ -130,14 +130,14 @@
 			);
 			dependencies = (
 			);
-			name = Symbolog;
+			name = SymbolLog;
 			productName = SymbolLog;
-			productReference = E2A2AC3C1D6DA2310054E50E /* Symbolog.app */;
+			productReference = E2A2AC3C1D6DA2310054E50E /* SymbolLog.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E2A2AC521D6DA2310054E50E /* SymbologTests */ = {
+		E2A2AC521D6DA2310054E50E /* SymbolLogTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E2A2AC5F1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "SymbologTests" */;
+			buildConfigurationList = E2A2AC5F1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "SymbolLogTests" */;
 			buildPhases = (
 				E2A2AC4F1D6DA2310054E50E /* Sources */,
 				E2A2AC501D6DA2310054E50E /* Frameworks */,
@@ -148,9 +148,9 @@
 			dependencies = (
 				E2A2AC551D6DA2310054E50E /* PBXTargetDependency */,
 			);
-			name = SymbologTests;
+			name = SymbolLogTests;
 			productName = SymbolLogTests;
-			productReference = E2A2AC531D6DA2310054E50E /* Symbolog.xctest */;
+			productReference = E2A2AC531D6DA2310054E50E /* SymbolLog.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -173,7 +173,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E2A2AC371D6DA2310054E50E /* Build configuration list for PBXProject "Symbolog" */;
+			buildConfigurationList = E2A2AC371D6DA2310054E50E /* Build configuration list for PBXProject "SymbolLog" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -186,8 +186,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E2A2AC3B1D6DA2310054E50E /* Symbolog */,
-				E2A2AC521D6DA2310054E50E /* SymbologTests */,
+				E2A2AC3B1D6DA2310054E50E /* SymbolLog */,
+				E2A2AC521D6DA2310054E50E /* SymbolLogTests */,
 			);
 		};
 /* End PBXProject section */
@@ -242,7 +242,7 @@
 /* Begin PBXTargetDependency section */
 		E2A2AC551D6DA2310054E50E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E2A2AC3B1D6DA2310054E50E /* Symbolog */;
+			target = E2A2AC3B1D6DA2310054E50E /* SymbolLog */;
 			targetProxy = E2A2AC541D6DA2310054E50E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -358,8 +358,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SymbolLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.SymbolLog;
-				PRODUCT_NAME = Symbolog;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.Symbolog;
+				PRODUCT_NAME = SymbolLog;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -372,8 +372,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SymbolLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.SymbolLog;
-				PRODUCT_NAME = Symbolog;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.Symbolog;
+				PRODUCT_NAME = SymbolLog;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -385,8 +385,8 @@
 				INFOPLIST_FILE = SymbolLogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SymbolLogTests;
-				PRODUCT_NAME = Symbolog;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Symbolog.app/Symbolog";
+				PRODUCT_NAME = SymbolLog;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SymbolLog.app/SymbolLog";
 			};
 			name = Debug;
 		};
@@ -397,15 +397,15 @@
 				INFOPLIST_FILE = SymbolLogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SymbolLogTests;
-				PRODUCT_NAME = Symbolog;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Symbolog.app/Symbolog";
+				PRODUCT_NAME = SymbolLog;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SymbolLog.app/SymbolLog";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E2A2AC371D6DA2310054E50E /* Build configuration list for PBXProject "Symbolog" */ = {
+		E2A2AC371D6DA2310054E50E /* Build configuration list for PBXProject "SymbolLog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E2A2AC5A1D6DA2310054E50E /* Debug */,
@@ -414,7 +414,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E2A2AC5C1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "Symbolog" */ = {
+		E2A2AC5C1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "SymbolLog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E2A2AC5D1D6DA2310054E50E /* Debug */,
@@ -423,7 +423,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E2A2AC5F1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "SymbologTests" */ = {
+		E2A2AC5F1D6DA2310054E50E /* Build configuration list for PBXNativeTarget "SymbolLogTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E2A2AC601D6DA2310054E50E /* Debug */,

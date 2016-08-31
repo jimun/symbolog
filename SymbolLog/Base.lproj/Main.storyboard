@@ -153,57 +153,79 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f3W-DJ-Cm0">
-                                <rect key="frame" x="150" y="225" width="300" height="150"/>
+                                <rect key="frame" x="150" y="140" width="300" height="150"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LER-mD-akg" userLabel="MainImageView">
-                                <rect key="frame" x="150" y="225" width="300" height="150"/>
+                                <rect key="frame" x="150" y="140" width="300" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Lt0-kh-0S9"/>
                                     <constraint firstAttribute="width" constant="300" id="VAw-C4-Fql"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lbC-Xx-zzl" userLabel="TempImageView">
-                                <rect key="frame" x="150" y="225" width="300" height="150"/>
+                                <rect key="frame" x="150" y="140" width="300" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="bok-qD-BR3"/>
                                     <constraint firstAttribute="width" constant="300" id="xRl-OD-g8x"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eva-y3-DJ3">
-                                <rect key="frame" x="281" y="28" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eva-y3-DJ3">
+                                <rect key="frame" x="281" y="100" width="39" height="30"/>
                                 <state key="normal" title="Reset"/>
                                 <connections>
                                     <action selector="reset:" destination="we6-MN-VV2" eventType="touchUpInside" id="PKo-rK-ECb"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="9Zg-ZI-ppF" customClass="ColorControl" customModule="SymbolLog" customModuleProvider="target">
+                                <rect key="frame" x="150" y="324" width="300" height="240"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Eva-y3-DJ3" firstAttribute="top" secondItem="SUr-9v-Bqn" secondAttribute="topMargin" constant="100" id="1N2-F4-Mpi"/>
                             <constraint firstItem="f3W-DJ-Cm0" firstAttribute="trailing" secondItem="lbC-Xx-zzl" secondAttribute="trailing" id="BfF-yH-aje"/>
                             <constraint firstItem="f3W-DJ-Cm0" firstAttribute="bottom" secondItem="lbC-Xx-zzl" secondAttribute="bottom" id="Hz5-Hm-mRd"/>
                             <constraint firstItem="f3W-DJ-Cm0" firstAttribute="leading" secondItem="LER-mD-akg" secondAttribute="leading" id="J24-FO-IxM"/>
                             <constraint firstItem="lbC-Xx-zzl" firstAttribute="top" secondItem="LER-mD-akg" secondAttribute="top" id="K7I-LS-BeP"/>
-                            <constraint firstItem="lbC-Xx-zzl" firstAttribute="centerY" secondItem="SUr-9v-Bqn" secondAttribute="centerY" id="XFL-pG-l34"/>
+                            <constraint firstItem="lbC-Xx-zzl" firstAttribute="centerY" secondItem="SUr-9v-Bqn" secondAttribute="centerY" constant="-85" id="XFL-pG-l34"/>
+                            <constraint firstItem="lbC-Xx-zzl" firstAttribute="top" secondItem="Eva-y3-DJ3" secondAttribute="bottom" constant="10" id="XQt-xC-UbZ"/>
+                            <constraint firstItem="9Zg-ZI-ppF" firstAttribute="leading" secondItem="LER-mD-akg" secondAttribute="leading" id="i0L-eW-pll"/>
                             <constraint firstItem="lbC-Xx-zzl" firstAttribute="trailing" secondItem="LER-mD-akg" secondAttribute="trailing" id="jZD-co-iY7"/>
-                            <constraint firstItem="Eva-y3-DJ3" firstAttribute="top" secondItem="MdX-Qe-rzb" secondAttribute="bottom" constant="8" symbolic="YES" id="l4A-Hp-a8k"/>
                             <constraint firstItem="Eva-y3-DJ3" firstAttribute="centerX" secondItem="lbC-Xx-zzl" secondAttribute="centerX" id="l8R-8U-Bel"/>
                             <constraint firstItem="f3W-DJ-Cm0" firstAttribute="top" secondItem="LER-mD-akg" secondAttribute="top" id="lMe-Lc-tEb"/>
                             <constraint firstItem="lbC-Xx-zzl" firstAttribute="bottom" secondItem="LER-mD-akg" secondAttribute="bottom" id="nPW-xQ-fQ9"/>
                             <constraint firstItem="Eva-y3-DJ3" firstAttribute="centerX" secondItem="SUr-9v-Bqn" secondAttribute="centerX" id="tRi-mr-HS5"/>
                             <constraint firstItem="lbC-Xx-zzl" firstAttribute="leading" secondItem="LER-mD-akg" secondAttribute="leading" id="wvU-go-tnf"/>
+                            <constraint firstItem="9Zg-ZI-ppF" firstAttribute="top" secondItem="lbC-Xx-zzl" secondAttribute="bottom" constant="34" id="zZ0-gL-8Se"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1N2-F4-Mpi"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Draw the Symbol" id="9yT-dG-GaY">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="o5k-Zf-c1X"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="bw3-ZY-BZM"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="o5k-Zf-c1X">
+                            <connections>
+                                <action selector="cancel:" destination="we6-MN-VV2" id="hSW-vW-t0k"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="bw3-ZY-BZM">
+                            <connections>
+                                <segue destination="ADp-lE-UTI" kind="unwind" unwindAction="unwindToSymbolView:" id="yQi-oT-rbX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="colorControl" destination="9Zg-ZI-ppF" id="fc1-C9-qBd"/>
                         <outlet property="mainImageView" destination="LER-mD-akg" id="S6t-9g-m5U"/>
+                        <outlet property="saveButton" destination="bw3-ZY-BZM" id="Qtu-93-Wrf"/>
                         <outlet property="tempImageView" destination="lbC-Xx-zzl" id="R6Y-4c-wyn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zFp-gX-Qwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ADp-lE-UTI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3443" y="431"/>
         </scene>

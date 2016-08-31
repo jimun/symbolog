@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SymbolLog/SymbolViewController.swift"
-            timestampString = "494233963.080247"
+            filePath = "SymbolLog/SymbolDrawViewController.swift"
+            timestampString = "494295598.22419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "unwindToSymbolView(_:)"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SymbolLog/SymbolDrawViewController.swift"
-            timestampString = "494232836.93767"
+            timestampString = "494295598.22419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
@@ -41,28 +41,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SymbolLog/SymbolDrawViewController.swift"
-            timestampString = "494232836.93767"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "prepareForSegue(_:sender:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "SymbolLog/ColorControl.swift"
-            timestampString = "494234953.074848"
+            timestampString = "494296272.278239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "colorButtonTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SymbolLog/ColorControl.swift"
-            timestampString = "494234953.074848"
+            timestampString = "494296272.278239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "init(coder:)"
             landmarkType = "5">
          </BreakpointContent>

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,7 +17,39 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="HYK-wf-AnD">
+                                <rect key="frame" x="200" y="135" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HYK-wf-AnD" secondAttribute="height" multiplier="1:1" id="RS6-0i-F4Q"/>
+                                    <constraint firstAttribute="width" constant="200" id="wnB-jg-i2C"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="wnB-jg-i2C"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbolog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jx-jS-bOh">
+                                <rect key="frame" x="261" y="388" width="79" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="9Y5-hq-4cv"/>
+                                    <constraint firstAttribute="width" secondItem="6Jx-jS-bOh" secondAttribute="height" multiplier="79:21" id="INr-MU-iRW"/>
+                                    <constraint firstAttribute="width" constant="79" id="geR-QX-3Je"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.83921568629999999" green="0.81960784310000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Jx-jS-bOh" firstAttribute="top" secondItem="HYK-wf-AnD" secondAttribute="bottom" constant="53" id="HWE-Fs-yFl"/>
+                            <constraint firstItem="HYK-wf-AnD" firstAttribute="centerX" secondItem="6Jx-jS-bOh" secondAttribute="centerX" id="KKN-iY-Gcm"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="6Jx-jS-bOh" secondAttribute="bottom" constant="191" id="MQS-Vs-WUi"/>
+                            <constraint firstItem="HYK-wf-AnD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="a7O-n4-e6x"/>
+                            <constraint firstItem="HYK-wf-AnD" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="115" id="sNf-Bl-5tp"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +57,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launchImage" width="150" height="150"/>
+    </resources>
 </document>

@@ -13,7 +13,7 @@ class SymbolDrawViewController: UIViewController {
     // MARK: Properties
     var lastPoint = CGPoint.zero
     var selectedColor: CGColor = UIColor.blackColor().CGColor
-    var brushWidth: CGFloat = 15.0
+    var brushWidth: CGFloat = 10.0 // TODO: Options for more variety of brush size?
     var opacity: CGFloat = 1.0
     var swiped = false
     
@@ -26,6 +26,7 @@ class SymbolDrawViewController: UIViewController {
     
     @IBOutlet weak var tempImageView: UIImageView!
     @IBOutlet weak var mainImageView: UIImageView!
+    
     @IBOutlet weak var colorControl: ColorControl!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -146,7 +147,7 @@ class SymbolDrawViewController: UIViewController {
     // MARK: - Navigation
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+                dismissViewControllerAnimated(true, completion: nil)
     }
     
 

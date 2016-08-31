@@ -22,8 +22,9 @@ class Symbol: NSObject, NSCoding {
     
     var mainKeyword: String
     var image: UIImage
-    var secondaryKeywords: [String]
+    
     // TOOD: Add additional keywords
+    //var secondaryKeywords: [String]
     
     
     // MARK: Archiving Paths
@@ -33,10 +34,10 @@ class Symbol: NSObject, NSCoding {
     
     // MARK: Initialization
     
-    init?(mainKeyword: String, image: UIImage, secondaryKeywords: [String]){
+    init?(mainKeyword: String, image: UIImage){
         self.mainKeyword = mainKeyword
         self.image = image
-        self.secondaryKeywords = secondaryKeywords
+        //self.secondaryKeywords = secondaryKeywords
         
         super.init()
         
@@ -49,12 +50,12 @@ class Symbol: NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder){
         aCoder.encodeObject(mainKeyword, forKey: PropertyKey.mainKeywordKey)
         aCoder.encodeObject(image, forKey: PropertyKey.imageKey)
-        aCoder.encodeObject(secondaryKeywords, forKey: PropertyKey.secondaryKeywordsKey)
+        //aCoder.encodeObject(secondaryKeywords, forKey: PropertyKey.secondaryKeywordsKey)
     }
     
-    convenience init?(mainKeyword: String, image: UIImage) {
-        self.init(mainKeyword: mainKeyword, image: image, secondaryKeywords: [String]())
-    }
+    //convenience init?(mainKeyword: String, image: UIImage) {
+    //    self.init(mainKeyword: mainKeyword, image: image)
+    //}
     
     required convenience init?(coder aDecoder: NSCoder) {
         let mainKeyword = aDecoder.decodeObjectForKey(PropertyKey.mainKeywordKey) as! String
@@ -62,9 +63,9 @@ class Symbol: NSObject, NSCoding {
         // Because photo is an optional property of Meal, use conditional cast.
         let image = aDecoder.decodeObjectForKey(PropertyKey.imageKey) as! UIImage
         
-        let secondaryKeywords = aDecoder.decodeObjectForKey(PropertyKey.secondaryKeywordsKey) as? [String] ?? [String]()
+        //let secondaryKeywords = aDecoder.decodeObjectForKey(PropertyKey.secondaryKeywordsKey) as? [String] ?? [String]()
         
         // Must call designated initializer.
-        self.init(mainKeyword: mainKeyword, image: image, secondaryKeywords: secondaryKeywords)
+        self.init(mainKeyword: mainKeyword, image: image)
     }
 }

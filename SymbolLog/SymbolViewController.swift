@@ -89,19 +89,19 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         if saveButton === sender {
             let mainKeyword = mainKeywordTextField.text ?? ""
             let image = imageView.image!
-            let secondaryKeywords = [String]()
             
             // Set the meal to be passed to MealTableViewController after the unwind segue.
-            symbol = Symbol(mainKeyword: mainKeyword, image: image, secondaryKeywords: secondaryKeywords)
+            symbol = Symbol(mainKeyword: mainKeyword, image: image)
         }
         else if segue.identifier == "editImageSegue"{
             
             let navController = segue.destinationViewController as! UINavigationController
             let drawController = navController.topViewController as! SymbolDrawViewController
-            if let image = symbol?.image {
-                drawController.image = image
-            } else if imageEdited {
+            if imageEdited {
                 drawController.image = imageView.image
+            }
+            else if let image = symbol?.image {
+                drawController.image = image
             }
         }
     }
