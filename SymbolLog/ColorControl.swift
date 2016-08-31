@@ -19,14 +19,18 @@ class ColorControl: UIView {
         UIColor.orangeColor(),
         UIColor.yellowColor(),
         UIColor.greenColor(),
+        UIColor.init(red: 0 / 255.0, green: 88.0/255.0, blue: 38.0 / 255.0, alpha: 1.0), // Dark Green
+        UIColor.init(red: 84.0 / 255.0, green: 112.0/225, blue: 68.0 / 255.0, alpha: 1.0), // grey green
         UIColor.cyanColor(),
         UIColor.init(red: 57.0 / 255.0, green: 150.0 / 255.0, blue: 210.0 / 255.0, alpha: 1.0), // Medium Blue
         UIColor.blueColor(),
-        UIColor.init(red: 0.0, green: 25.0 / 255.0, blue: 180.0 / 255.0, alpha: 1.0), // Dark Blue
+        //UIColor.init(red: 0.0, green: 25.0 / 255.0, blue: 180.0 / 255.0, alpha: 1.0), // Dark Blue
         UIColor.magentaColor(),
         UIColor.init(red: 180.0 / 255.0, green: 0.0, blue: 123.0 / 255.0, alpha: 1.0), // Fuschia-ish
-        UIColor.init(red: 160.0 / 255.0, green: 2.0 / 255.0, blue: 160.0 / 255.0, alpha: 1.0), // Darker Pink
-        UIColor.purpleColor()
+
+        UIColor.purpleColor(),
+        UIColor.init(red: 102.0 / 255.0, green: 45.0 / 255.0, blue: 145.0 / 255.0, alpha: 1.0), // My purple
+        UIColor.init(red: 163.0 / 255.0, green: 98.0 / 255.0, blue: 10.0 / 255.0, alpha: 1.0), // light Brown
     ]
     var selectedButtonIndex = 0
     var currentColor: UIColor = UIColor.blackColor()
