@@ -8,14 +8,21 @@
 
 import UIKit
 
-class SymbolTableViewController: UITableViewController {
+class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
     // MARK: Properties
     
     var symbols = [Symbol]()
+    var searchActive : Bool = false
+    var filtered:[Symbol] = []
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem()
@@ -26,6 +33,11 @@ class SymbolTableViewController: UITableViewController {
             // Load the sample data.
             loadSampleSymbols()
         }
+        
+        /* Setup delegates */
+        tableView.delegate = self
+        tableView.dataSource = self
+        searchBar.delegate = self
     }
     
     func loadSampleSymbols() {
@@ -54,19 +66,27 @@ class SymbolTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if searchActive {
+            return filtered.count
+        }
         return symbols.count
+        
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier = "SymbolTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SymbolTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SymbolTableViewCell
         
-        let symbol = symbols[indexPath.row]
-        cell.mainKeywordLabel.text = symbol.mainKeyword
-        cell.symbolImageView.image = symbol.image
+        var symbol:Symbol? = nil
+        if searchActive {
+            symbol = filtered[indexPath.row]
+        } else {
+            symbol = symbols[indexPath.row]
+        }
+        cell.mainKeywordLabel.text = symbol?.mainKeyword
+        cell.symbolImageView.image = symbol?.image
 
         return cell
     }
@@ -104,6 +124,37 @@ class SymbolTableViewController: UITableViewController {
         return true
     }
     */
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        filtered = symbols.filter({ (symbol) -> Bool in
+            let tmp: NSString = symbol.mainKeyword
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tableView.reloadData()
+    }
 
     
     // MARK: - Navigation

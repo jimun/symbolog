@@ -9,12 +9,12 @@
 import UIKit
 
 class SymbolTableViewCell: UITableViewCell {
-
-    // MARK: Properties
+    
+    // MARK: IBOutlets
     
     @IBOutlet weak var mainKeywordLabel: UILabel!
     @IBOutlet weak var symbolImageView: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
