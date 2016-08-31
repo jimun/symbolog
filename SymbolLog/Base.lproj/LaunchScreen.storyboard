@@ -31,7 +31,7 @@
                                 </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbolog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jx-jS-bOh">
-                                <rect key="frame" x="261" y="388" width="79" height="21"/>
+                                <rect key="frame" x="261" y="357" width="79" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9Y5-hq-4cv"/>
                                     <constraint firstAttribute="width" secondItem="6Jx-jS-bOh" secondAttribute="height" multiplier="79:21" id="INr-MU-iRW"/>
@@ -44,9 +44,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.83921568629999999" green="0.81960784310000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Jx-jS-bOh" firstAttribute="top" secondItem="HYK-wf-AnD" secondAttribute="bottom" constant="53" id="HWE-Fs-yFl"/>
+                            <constraint firstItem="6Jx-jS-bOh" firstAttribute="top" secondItem="HYK-wf-AnD" secondAttribute="bottom" constant="22" id="HWE-Fs-yFl"/>
                             <constraint firstItem="HYK-wf-AnD" firstAttribute="centerX" secondItem="6Jx-jS-bOh" secondAttribute="centerX" id="KKN-iY-Gcm"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="6Jx-jS-bOh" secondAttribute="bottom" constant="191" id="MQS-Vs-WUi"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="6Jx-jS-bOh" secondAttribute="bottom" constant="222" id="MQS-Vs-WUi"/>
                             <constraint firstItem="HYK-wf-AnD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="a7O-n4-e6x"/>
                             <constraint firstItem="HYK-wf-AnD" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="115" id="sNf-Bl-5tp"/>
                         </constraints>

@@ -38,7 +38,7 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imageView.layer.borderColor = UIColor.lightGrayColor().CGColor
         imageView.layer.borderWidth = 2
         
-        checkValidSymbolMainKeyword()
+        checkReadyForSave()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,10 +52,10 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         saveButton.enabled = false
     }
     
-    func checkValidSymbolMainKeyword() {
+    func checkReadyForSave() {
         // Disable the Save buton if the text field is empty.
         let text = mainKeywordTextField.text ?? ""
-        saveButton.enabled = !text.isEmpty
+        saveButton.enabled = !text.isEmpty && (imageEdited || symbol?.image != nil)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -65,7 +65,7 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        checkValidSymbolMainKeyword()
+        checkReadyForSave()
         navigationItem.title = mainKeywordTextField.text
     }
     
@@ -110,6 +110,7 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         if let sourceViewController = sender.sourceViewController as? SymbolDrawViewController, image = sourceViewController.image {
             imageView.image = image
             imageEdited = true
+            checkReadyForSave()
         }
     }
 

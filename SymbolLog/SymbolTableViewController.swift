@@ -11,86 +11,116 @@ import UIKit
 class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
     // MARK: Properties
-    
+    var symbolsDict = [Character: [Symbol]]()
     var symbols = [Symbol]()
     var searchActive : Bool = false
-    var filtered:[Symbol] = []
-
-    @IBOutlet weak var searchBar: UISearchBar!
+    let alphabet:[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
+    struct SymbolGroup {
+        var firstLetter: String!
+        var symbols: [Symbol]!
+    }
+    
+    var symbolGroupArray:[SymbolGroup]! = [SymbolGroup]()
+    
+    var filtered:[SymbolGroup] = []
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem()
         
         if let savedSymbols = loadSymbols() {
-            symbols += savedSymbols
-        } else {
-            // Load the sample data.
-            loadSampleSymbols()
+            symbols = savedSymbols
         }
-        
+        symbolGroupArray = sectionSymbols(symbols)!
+
         /* Setup delegates */
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        
+        sortList()
     }
     
-    func loadSampleSymbols() {
-        let image1 = UIImage(named: "god")!
-        let symbol1 = Symbol(mainKeyword: "God", image: image1)!
-        
-        let image2 = UIImage(named: "righteous")!
-        let symbol2 = Symbol(mainKeyword: "Righteous", image: image2)!
-        
-        let image3 = UIImage(named: "joy")!
-        let symbol3 = Symbol(mainKeyword: "Joy", image: image3)!
-        
-        symbols += [symbol1, symbol2, symbol3]
+    func sortList(){
+        symbolGroupArray.sortInPlace({ $0.firstLetter < $1.firstLetter })  // Sort by keyword
+        tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    // 1
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return symbolGroupArray.count
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchActive {
-            return filtered.count
-        }
-        return symbols.count
-        
-    }
-
     
+    // 2
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return objectArray[section].sectionObjects.count
+
+        if searchActive {
+            return filtered[section].symbols.count
+            //return filtered.count
+        }
+        return symbolGroupArray[section].symbols.count
+        //return symbolsDict.count
+    }
+    
+    // 3
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cellIdentifier = "SymbolTableViewCell"
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SymbolTableViewCell
         
         var symbol:Symbol? = nil
-        if searchActive {
-            symbol = filtered[indexPath.row]
+        if searchActive && filtered.count > 0 {
+            //symbol = filtered[indexPath.row]
+            symbol = filtered[indexPath.section].symbols[indexPath.row]
         } else {
-            symbol = symbols[indexPath.row]
+            symbol = symbolGroupArray[indexPath.section].symbols[indexPath.row]
         }
         cell.mainKeywordLabel.text = symbol?.mainKeyword
         cell.symbolImageView.image = symbol?.image
-
+        
         return cell
     }
+    
+    // 4
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.alphabet[section] //symbolGroupArray[section].alphabet.upperCaseString
+    }
+    
+    /*
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?{
+        return self.alphabet
+    }
+   */
+    
 
+    /*
+    
+    override func tableView(tableView: UITableView,
+                   sectionForSectionIndexTitle title: String,
+                                               atIndex index: Int) -> Int{
+        
+        return index
+    }*/
+    
+    /*
+    override func tableView(tableView: UITableView,
+                   titleForHeaderInSection section: Int) -> String?{
+        
+        return self.sections[section] as? String
+    }
+ */
     
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -107,47 +137,39 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    // MARK: Searchbar related functions
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true;
+        print(true)
+        searchActive = true
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false;
+        print(false)
+        searchActive = false
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
+        print(false)
+        searchActive = false
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
+        print(false)
+        searchActive = false
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        filtered = symbols.filter({ (symbol) -> Bool in
+        let filteredSymbols = symbols.filter({ (symbol) -> Bool in
             let tmp: NSString = symbol.mainKeyword
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
+        filtered = sectionSymbols(filteredSymbols)!
+        
         if(filtered.count == 0){
             searchActive = false;
         } else {
@@ -155,10 +177,10 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         }
         self.tableView.reloadData()
     }
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -168,7 +190,8 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
             // Get the cell that generated this segue.
             if let selectedSymbolCell = sender as? SymbolTableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedSymbolCell)!
-                let selectedSymbol = symbols[indexPath.row]
+                //let selectedSymbol = symbols[indexPath.row]
+                let selectedSymbol = symbolGroupArray[indexPath.section].symbols[indexPath.row]
                 symbolDetailViewController.symbol = selectedSymbol
             }
         }
@@ -181,28 +204,55 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     @IBAction func unwindToSymbolList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? SymbolViewController, symbol = sourceViewController.symbol {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                symbols[selectedIndexPath.row] = symbol
+                symbolGroupArray[selectedIndexPath.section].symbols[selectedIndexPath.row] = symbol
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             } else {
                 // Add a new meal.
-                let newIndexPath = NSIndexPath(forRow: symbols.count, inSection: 0)
-                symbols.append(symbol)
+                //let newIndexPath = NSIndexPath(forRow: symbols.count, inSection: 0)
+                //symbols.append(symbol)
+                //tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+                
+                let firstLetter = String(symbol.mainKeyword[symbol.mainKeyword.startIndex]).uppercaseString
+                let sectionIndex = alphabet.indexOf(firstLetter)
+                let newIndexPath = NSIndexPath(forRow: symbolGroupArray[sectionIndex!].symbols.count, inSection: sectionIndex!)
+                
+                symbolGroupArray[sectionIndex!].symbols.append(symbol)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             }
             saveSymbols()
         }
     }
-
+    
     // MARK NSCoding
     
     func saveSymbols() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(symbols, toFile: Symbol.ArchiveURL.path!)
-        if !isSuccessfulSave {
+        if NSKeyedArchiver.archiveRootObject(symbols, toFile: Symbol.ArchiveURL.path!) {
+            sortList() // sort and refresh view
+        } else {
             print("Failed to save meals...")
         }
     }
     
+    func sectionSymbols(aSymbols: [Symbol]) -> [SymbolGroup]?{
+
+        var symbolsSectioned = [String: [Symbol]]()
+        for c in alphabet {
+            symbolsSectioned[c.lowercaseString] = [Symbol]()
+        }
+        for aS in aSymbols {
+            let firstLetter = String(aS.mainKeyword[aS.mainKeyword.startIndex]).lowercaseString
+            let editedSymbols = symbolsSectioned[firstLetter]! + [aS]
+            symbolsSectioned[firstLetter] = editedSymbols
+        }
+        
+        var sga = [SymbolGroup]()
+        for (key, value) in symbolsSectioned { // sigh...
+            sga.append(SymbolGroup(firstLetter: key, symbols: value))
+        }
+        return sga
+    }
+    
     func loadSymbols() -> [Symbol]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Symbol.ArchiveURL.path!) as? [Symbol]
+        return  NSKeyedUnarchiver.unarchiveObjectWithFile(Symbol.ArchiveURL.path!) as? [Symbol]
     }
 }
