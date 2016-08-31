@@ -172,6 +172,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // TODO: Doesn't work for searched symbol. PRobably will have to make my own custom search to get this to work?
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "ShowDetail" {
@@ -181,7 +182,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
             if let selectedSymbolCell = sender as? SymbolTableViewCell {
                 print(self.tableView.indexPathForCell(selectedSymbolCell))
                 print(self.tableView.indexPathForSelectedRow!)
-                self.tableView.index
+                //self.tableView.index
                 print(searchDisplayController?.searchResultsTableView.indexPathForSelectedRow)
                 let indexPath = tableView.indexPathForCell(selectedSymbolCell)!
                 //let selectedSymbol = symbols[indexPath.row]
