@@ -113,6 +113,9 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="umc-2q-8QO" secondAttribute="height" multiplier="2:1" id="IuW-vt-Aa5"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="yiJ-Ew-3di" appends="YES" id="KlS-Oh-63l"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -128,9 +131,6 @@
                             <constraint firstItem="yuk-Sj-VAa" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Jz9-ur-Y2F"/>
                             <constraint firstItem="yuk-Sj-VAa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="n3M-ru-vhG"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Xqc-15-3ly" appends="YES" id="5aC-b1-Nzb"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="New Symbol" id="Mdy-b9-FZs">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="r0m-bL-gsx">
@@ -152,10 +152,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="ulp-W1-fkz" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="Xqc-15-3ly">
+                <tapGestureRecognizer id="yiJ-Ew-3di">
                     <connections>
-                        <outlet property="delegate" destination="umc-2q-8QO" id="4CA-EM-JZl"/>
-                        <segue destination="0K3-61-EJS" kind="show" identifier="editImageSegue" id="HHi-rs-cAk"/>
+                        <action selector="imageEdit:" destination="BYZ-38-t0r" id="pe9-ns-JPd"/>
+                        <segue destination="0K3-61-EJS" kind="show" id="Jcg-Iy-wdM"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

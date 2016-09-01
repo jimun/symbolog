@@ -69,6 +69,11 @@ class SymbolViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         navigationItem.title = mainKeywordTextField.text
     }
     
+    // MARK: Action
+    
+    //@IBAction func imageEdit(sender: UITapGestureRecognizer) {
+    //}
+    
     // MARK: Navigation
     
     @IBAction func cancel(sender: UIBarButtonItem) {

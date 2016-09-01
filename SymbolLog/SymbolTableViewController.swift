@@ -180,8 +180,6 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
             
             // Get the cell that generated this segue.
             if let selectedSymbolCell = sender as? SymbolTableViewCell {
-                print(self.tableView.indexPathForCell(selectedSymbolCell))
-                print(self.tableView.indexPathForSelectedRow!)
                 //self.tableView.index
                 print(searchDisplayController?.searchResultsTableView.indexPathForSelectedRow)
                 let indexPath = tableView.indexPathForCell(selectedSymbolCell)!
@@ -232,8 +230,11 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // MARK NSCoding
     
     func saveSymbols() {
-        if NSKeyedArchiver.archiveRootObject(symbols, toFile: Symbol.ArchiveURL.path!) {
+        let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
+        print(symbolsOnly)
+        if NSKeyedArchiver.archiveRootObject(symbolsOnly, toFile: Symbol.ArchiveURL.path!) {
             sortList() // sort and refresh view
+            print("Successfully saved")
         } else {
             print("Failed to save meals...")
         }
