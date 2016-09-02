@@ -66,8 +66,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return objectArray[section].sectionObjects.count
-
+        
         if searchActive {
             if filtered.count == 0 {
                 return 0
@@ -75,6 +74,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
                 return filtered[section].symbols.count
             }
         }
+        print("\(section) \(symbolGroupArray[section].symbols.count)")
         return symbolGroupArray[section].symbols.count
         //return symbolsDict.count
     }
@@ -88,7 +88,6 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         let cellIdentifier = "SymbolTableViewCell"
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SymbolTableViewCell
         
-        print("\(searchActive) \(filtered.count) \(indexPath.section) \(indexPath.row)")
         var symbol:Symbol?
         
         if searchActive {
@@ -108,7 +107,6 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
     
@@ -116,11 +114,12 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            symbols.removeAtIndex(indexPath.row)
+            print("\(indexPath.section) \(indexPath.row)")
+            print(symbolGroupArray[indexPath.section].symbols.count)
+            symbolGroupArray[indexPath.section].symbols.removeAtIndex(indexPath.row)
+            //symbols.removeAtIndex(indexPath.row)
             saveSymbols()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
 
@@ -165,9 +164,11 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         view.tintColor = UIColor(red: 214.0/255.0, green: 209.0/255.0, blue: 66.0/255.0, alpha: 0.5)
     }
     
+    /*
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50.0
     }
+ */
 
     // MARK: - Navigation
     
@@ -231,9 +232,8 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     
     func saveSymbols() {
         let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
-        print(symbolsOnly)
         if NSKeyedArchiver.archiveRootObject(symbolsOnly, toFile: Symbol.ArchiveURL.path!) {
-            sortList() // sort and refresh view
+            //sortList() // sort and refresh view
             print("Successfully saved")
         } else {
             print("Failed to save meals...")
