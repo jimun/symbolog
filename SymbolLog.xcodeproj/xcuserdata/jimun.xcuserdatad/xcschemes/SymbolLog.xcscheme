@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E2A2AC521D6DA2310054E50E"
-               BuildableName = "SymbolLogTests.xctest"
+               BuildableName = "SymbolLog.xctest"
                BlueprintName = "SymbolLogTests"
                ReferencedContainer = "container:SymbolLog.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2A2AC3B1D6DA2310054E50E"
-            BuildableName = "Symbolog.app"
+            BuildableName = "SymbolLog.app"
             BlueprintName = "SymbolLog"
             ReferencedContainer = "container:SymbolLog.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2A2AC3B1D6DA2310054E50E"
-            BuildableName = "Symbolog.app"
+            BuildableName = "SymbolLog.app"
             BlueprintName = "SymbolLog"
             ReferencedContainer = "container:SymbolLog.xcodeproj">
          </BuildableReference>

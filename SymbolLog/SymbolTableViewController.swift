@@ -9,21 +9,20 @@
 import UIKit
 
 class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
-    
-    // MARK: Properties
-    var symbolsDict = [Character: [Symbol]]()
-    var symbols = [Symbol]()
-    var searchActive : Bool = false
-    let alphabet:[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    
+
     struct SymbolGroup {
         var firstLetter: String!
         var symbols: [Symbol]!
     }
     
+    // MARK: Properties
+    //var symbols = [Symbol]()
+    var searchActive : Bool = false
+    let alphabet:[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
     var symbolGroupArray:[SymbolGroup]! = [SymbolGroup]()
-    
-    var filtered:[SymbolGroup] = []
+    //var filtered:[Symbol] = [Symbol]()
+    var filtered:[SymbolGroup] = [SymbolGroup]()
     
     @IBOutlet weak var searchBar: UISearchBar!
     //@IBOutlet weak var searchBar: UISearchBar!
@@ -36,10 +35,13 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem()
         
+        var symbols = [Symbol]()
         if let savedSymbols = loadSymbols() {
             symbols = savedSymbols
         }
         symbolGroupArray = sectionSymbols(symbols)!
+        
+        tableView.backgroundView = nil
 
         /* Setup delegates */
         tableView.delegate = self
@@ -50,7 +52,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     func sortList(){
-        symbolGroupArray.sortInPlace({ $0.firstLetter < $1.firstLetter })  // Sort by keyword
+        //symbolGroupArray.sortInPlace({ $0.firstLetter < $1.firstLetter })  // Sort by keyword
         tableView.reloadData()
     }
     
@@ -63,24 +65,31 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return symbolGroupArray.count
+        //return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if searchActive {
-            if filtered.count == 0 {
-                return 0
+        var rowCount = 0
+        if searchActive && searchBarTextNotEmpty() {
+            rowCount = filtered[section].symbols.count
+            if filtered.map({$0.symbols.count}).reduce(0, combine: +) == 0 {
+                tableView.separatorStyle = .None
             } else {
-                return filtered[section].symbols.count
+                tableView.separatorStyle = .SingleLine
             }
+        } else {
+            rowCount =  symbolGroupArray[section].symbols.count
+            tableView.separatorStyle = .SingleLine
         }
-        print("\(section) \(symbolGroupArray[section].symbols.count)")
-        return symbolGroupArray[section].symbols.count
-        //return symbolsDict.count
+        
+        return rowCount
     }
     
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if searchActive {
+            return nil
+        }
         return self.alphabet[section]
     }
     
@@ -90,15 +99,12 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         
         var symbol:Symbol?
         
-        if searchActive {
-            if filtered.count == 0 || filtered[indexPath.section].symbols.count == 0 {
-                return cell // exit early
-            }
-            //symbol = filtered[indexPath.row]
+        if searchActive && searchBarTextNotEmpty() {
             symbol = filtered[indexPath.section].symbols[indexPath.row]
         } else {
             symbol = symbolGroupArray[indexPath.section].symbols[indexPath.row]
         }
+ 
         cell.mainKeywordLabel.text = symbol?.mainKeyword
         cell.symbolImageView.image = symbol?.image
         
@@ -114,9 +120,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            print("\(indexPath.section) \(indexPath.row)")
-            print(symbolGroupArray[indexPath.section].symbols.count)
-            symbolGroupArray[indexPath.section].symbols.removeAtIndex(indexPath.row)
+            //symbolGroupArray[indexPath.section].symbols.removeAtIndex(indexPath.row)
             //symbols.removeAtIndex(indexPath.row)
             saveSymbols()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -125,12 +129,16 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
 
     // MARK: Searchbar related functions
     
+    func searchBarTextNotEmpty() -> Bool{
+        return !(searchBar.text?.isEmpty)!
+    }
+    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false
+        searchActive = true
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -143,10 +151,14 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        let filteredSymbols = symbols.filter({ (symbol) -> Bool in
-            let tmp: NSString = symbol.mainKeyword
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
+        let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
+        let searchString = searchBar.text
+        
+        let filteredSymbols = symbolsOnly.filter({ (symbol) -> Bool in
+            let mainKeyword: NSString = symbol.mainKeyword
+            let found = (mainKeyword.rangeOfString(searchString!, options: NSStringCompareOptions.CaseInsensitiveSearch).location) != NSNotFound
+            return found
+            
         })
         filtered = sectionSymbols(filteredSymbols)!
         
@@ -164,11 +176,9 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         view.tintColor = UIColor(red: 214.0/255.0, green: 209.0/255.0, blue: 66.0/255.0, alpha: 0.5)
     }
     
-    /*
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50.0
     }
- */
 
     // MARK: - Navigation
     
@@ -183,18 +193,21 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
             if let selectedSymbolCell = sender as? SymbolTableViewCell {
                 //self.tableView.index
                 print(searchDisplayController?.searchResultsTableView.indexPathForSelectedRow)
+                print(selectedSymbolCell.mainKeywordLabel.text)
                 let indexPath = tableView.indexPathForCell(selectedSymbolCell)!
                 //let selectedSymbol = symbols[indexPath.row]
                 //let selectedSymbol = symbolGroupArray[indexPath.section].symbols[indexPath.row]
                 //symbolDetailViewController.symbol = selectedSymbol
                 var selectedSymbol: Symbol
-                if searchActive {
+                if searchActive && searchBarTextNotEmpty() {
                     //if filtered.count == 0 || filtered[indexPath.section].symbols.count == 0 {
                     //    return cell // exit early
                     //}
                     //symbol = filtered[indexPath.row]
+                    //selectedSymbol = filtered[indexPath.row]
                     selectedSymbol = filtered[indexPath.section].symbols[indexPath.row]
                 } else {
+                    //selectedSymbol = symbols[indexPath.row]
                     selectedSymbol = symbolGroupArray[indexPath.section].symbols[indexPath.row]
                 }
                 symbolDetailViewController.symbol = selectedSymbol
@@ -210,6 +223,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         if let sourceViewController = sender.sourceViewController as? SymbolViewController, symbol = sourceViewController.symbol {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 symbolGroupArray[selectedIndexPath.section].symbols[selectedIndexPath.row] = symbol
+                //symbols[selectedIndexPath.row] = symbol
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             } else {
                 // Add a new meal.
@@ -217,11 +231,18 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
                 //symbols.append(symbol)
                 //tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
                 
-                let firstLetter = String(symbol.mainKeyword[symbol.mainKeyword.startIndex]).uppercaseString
-                let sectionIndex = alphabet.indexOf(firstLetter)
-                let newIndexPath = NSIndexPath(forRow: symbolGroupArray[sectionIndex!].symbols.count, inSection: sectionIndex!)
                 
-                symbolGroupArray[sectionIndex!].symbols.append(symbol)
+                let firstLetter = String(symbol.mainKeyword[symbol.mainKeyword.startIndex]).uppercaseString
+                let sectionIndex = alphabet.indexOf(firstLetter)!
+                let newIndexPath = NSIndexPath(forRow: symbolGroupArray[sectionIndex].symbols.count, inSection: sectionIndex)
+                
+                symbolGroupArray[sectionIndex].symbols.append(symbol)
+                
+                /*
+                symbols.append(symbol)
+                let newIndexPath = NSIndexPath(forRow: symbols.count, inSection: 0)
+                */
+ 
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             }
             saveSymbols()
@@ -231,6 +252,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // MARK NSCoding
     
     func saveSymbols() {
+        //let symbolsOnly = symbols
         let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
         if NSKeyedArchiver.archiveRootObject(symbolsOnly, toFile: Symbol.ArchiveURL.path!) {
             //sortList() // sort and refresh view

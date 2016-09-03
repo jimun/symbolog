@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -30,25 +30,34 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbolog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jx-jS-bOh">
-                                <rect key="frame" x="261" y="357" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of marking symbols" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jx-jS-bOh">
+                                <rect key="frame" x="182" y="402" width="236" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9Y5-hq-4cv"/>
-                                    <constraint firstAttribute="width" secondItem="6Jx-jS-bOh" secondAttribute="height" multiplier="79:21" id="INr-MU-iRW"/>
-                                    <constraint firstAttribute="width" constant="79" id="geR-QX-3Je"/>
+                                    <constraint firstAttribute="width" secondItem="6Jx-jS-bOh" secondAttribute="height" multiplier="79:21" constant="157" id="INr-MU-iRW"/>
+                                    <constraint firstAttribute="width" constant="236" id="geR-QX-3Je"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbolog" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4t0-zZ-AOf">
+                                <rect key="frame" x="236" y="352" width="128" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.83921568629999999" green="0.81960784310000001" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Jx-jS-bOh" firstAttribute="top" secondItem="HYK-wf-AnD" secondAttribute="bottom" constant="22" id="HWE-Fs-yFl"/>
+                            <constraint firstItem="4t0-zZ-AOf" firstAttribute="top" secondItem="HYK-wf-AnD" secondAttribute="bottom" constant="17" id="0ja-a6-TCC"/>
+                            <constraint firstItem="6Jx-jS-bOh" firstAttribute="top" secondItem="HYK-wf-AnD" secondAttribute="bottom" constant="67" id="HWE-Fs-yFl"/>
                             <constraint firstItem="HYK-wf-AnD" firstAttribute="centerX" secondItem="6Jx-jS-bOh" secondAttribute="centerX" id="KKN-iY-Gcm"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="6Jx-jS-bOh" secondAttribute="bottom" constant="222" id="MQS-Vs-WUi"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="6Jx-jS-bOh" secondAttribute="bottom" constant="177" id="MQS-Vs-WUi"/>
+                            <constraint firstItem="4t0-zZ-AOf" firstAttribute="centerX" secondItem="6Jx-jS-bOh" secondAttribute="centerX" id="Zv0-CZ-ueD"/>
                             <constraint firstItem="HYK-wf-AnD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="a7O-n4-e6x"/>
                             <constraint firstItem="HYK-wf-AnD" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="115" id="sNf-Bl-5tp"/>
+                            <constraint firstItem="6Jx-jS-bOh" firstAttribute="top" secondItem="4t0-zZ-AOf" secondAttribute="bottom" constant="14" id="zNM-H5-uvF"/>
                         </constraints>
                     </view>
                 </viewController>
