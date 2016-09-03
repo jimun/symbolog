@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension SymbolTableViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+
 class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
     struct SymbolGroup {
@@ -28,6 +34,9 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     //@IBOutlet weak var searchBar: UISearchBar!
     //@IBOutlet var tableView: UITableView!
     
+    let searchController = UISearchController(searchResultsController: nil)
+
+    
     //@IBOutlet var searchDisplayController: UISearchDisplayController!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +51,19 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         symbolGroupArray = sectionSymbols(symbols)!
         
         tableView.backgroundView = nil
+        
+        // Set up controller for search bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
 
         /* Setup delegates */
         tableView.delegate = self
         tableView.dataSource = self
-        searchBar.delegate = self
+        //searchBar.delegate = self
+        
+        //self.searchController!.searchResultsTableView.registerClass(SymbolTableViewCell.self, forCellReuseIdentifier: "SymbolTableViewCell")
         
         sortList()
     }
@@ -94,6 +111,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cellIdentifier = "SymbolTableViewCell"
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SymbolTableViewCell
         
@@ -130,8 +148,10 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // MARK: Searchbar related functions
     
     func searchBarTextNotEmpty() -> Bool{
-        return !(searchBar.text?.isEmpty)!
+        return !(searchController.searchBar.text?.isEmpty)!
     }
+    
+    /*
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
@@ -149,7 +169,28 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false
     }
+ */
     
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
+        
+        let filteredSymbols = symbolsOnly.filter({ (symbol) -> Bool in
+            let mainKeyword: NSString = symbol.mainKeyword
+            let found = (mainKeyword.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch).location) != NSNotFound
+            return found
+        })
+        filtered = sectionSymbols(filteredSymbols)!
+        
+        if filtered.count == 0 || searchText.isEmpty {
+            searchActive = false
+        } else {
+            searchActive = true
+        }
+        
+        tableView.reloadData()
+    }
+    
+    /*
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
         let searchString = searchBar.text
@@ -169,6 +210,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         }
         self.tableView.reloadData()
     }
+ */
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
@@ -191,23 +233,11 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
             
             // Get the cell that generated this segue.
             if let selectedSymbolCell = sender as? SymbolTableViewCell {
-                //self.tableView.index
-                print(searchDisplayController?.searchResultsTableView.indexPathForSelectedRow)
-                print(selectedSymbolCell.mainKeywordLabel.text)
-                let indexPath = tableView.indexPathForCell(selectedSymbolCell)!
-                //let selectedSymbol = symbols[indexPath.row]
-                //let selectedSymbol = symbolGroupArray[indexPath.section].symbols[indexPath.row]
-                //symbolDetailViewController.symbol = selectedSymbol
+                let indexPath = self.tableView.indexPathForCell(selectedSymbolCell)!
                 var selectedSymbol: Symbol
                 if searchActive && searchBarTextNotEmpty() {
-                    //if filtered.count == 0 || filtered[indexPath.section].symbols.count == 0 {
-                    //    return cell // exit early
-                    //}
-                    //symbol = filtered[indexPath.row]
-                    //selectedSymbol = filtered[indexPath.row]
                     selectedSymbol = filtered[indexPath.section].symbols[indexPath.row]
                 } else {
-                    //selectedSymbol = symbols[indexPath.row]
                     selectedSymbol = symbolGroupArray[indexPath.section].symbols[indexPath.row]
                 }
                 symbolDetailViewController.symbol = selectedSymbol
