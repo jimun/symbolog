@@ -145,7 +145,7 @@
                 <tapGestureRecognizer id="yiJ-Ew-3di">
                     <connections>
                         <action selector="imageEdit:" destination="BYZ-38-t0r" id="pe9-ns-JPd"/>
-                        <segue destination="0K3-61-EJS" kind="show" id="Jcg-Iy-wdM"/>
+                        <segue destination="0K3-61-EJS" kind="show" identifier="editImageSegue" id="Jcg-Iy-wdM"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
