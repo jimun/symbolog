@@ -197,15 +197,8 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         if let sourceViewController = sender.sourceViewController as? SymbolViewController, symbol = sourceViewController.symbol {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 symbolGroupArray[selectedIndexPath.section].symbols[selectedIndexPath.row] = symbol
-                //symbols[selectedIndexPath.row] = symbol
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             } else {
-                // Add a new meal.
-                //let newIndexPath = NSIndexPath(forRow: symbols.count, inSection: 0)
-                //symbols.append(symbol)
-                //tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-                
-                
                 let firstLetter = String(symbol.mainKeyword[symbol.mainKeyword.startIndex]).uppercaseString
                 let sectionIndex = alphabet.indexOf(firstLetter)!
                 let newIndexPath = NSIndexPath(forRow: symbolGroupArray[sectionIndex].symbols.count, inSection: sectionIndex)
