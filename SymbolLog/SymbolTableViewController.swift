@@ -39,7 +39,7 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         
         var symbols = [Symbol]()
         if let savedSymbols = loadSymbols() {
-            symbols = savedSymbols
+            symbols += savedSymbols
         }
         symbolGroupArray = sectionSymbols(symbols)!
         
@@ -59,6 +59,9 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     func sortList(){
+        for var symbolGroup in symbolGroupArray {
+            symbolGroup.symbols.sortInPlace({ $0.mainKeyword < $1.mainKeyword })
+        }
         tableView.reloadData()
     }
     
@@ -222,12 +225,14 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         }
     }
     
-    func sectionSymbols(aSymbols: [Symbol]) -> [SymbolGroup]?{
+    func sectionSymbols(symbolArray: [Symbol]) -> [SymbolGroup]?{
         var symbolsSectioned = [String: [Symbol]]()
         for c in alphabet {
             symbolsSectioned[c.lowercaseString] = [Symbol]()
         }
-        for aS in aSymbols {
+        var aSymbolArray = symbolArray
+        aSymbolArray.sortInPlace{$0.mainKeyword < $1.mainKeyword}
+        for aS in aSymbolArray {
             let firstLetter = String(aS.mainKeyword[aS.mainKeyword.startIndex]).lowercaseString
             let editedSymbols = symbolsSectioned[firstLetter]! + [aS]
             symbolsSectioned[firstLetter] = editedSymbols
