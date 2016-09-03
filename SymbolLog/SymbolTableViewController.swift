@@ -131,14 +131,14 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        return !searchActive
     }
     
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            //symbolGroupArray[indexPath.section].symbols.removeAtIndex(indexPath.row)
+            symbolGroupArray[indexPath.section].symbols.removeAtIndex(indexPath.row)
             //symbols.removeAtIndex(indexPath.row)
             saveSymbols()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -150,26 +150,6 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
     func searchBarTextNotEmpty() -> Bool{
         return !(searchController.searchBar.text?.isEmpty)!
     }
-    
-    /*
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = true
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-        tableView.reloadData() // This is probably wrong
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-    }
- */
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
@@ -189,28 +169,6 @@ class SymbolTableViewController: UITableViewController, UISearchBarDelegate, UIS
         
         tableView.reloadData()
     }
-    
-    /*
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        let symbolsOnly = symbolGroupArray.flatMap{$0.symbols}.flatMap{$0}
-        let searchString = searchBar.text
-        
-        let filteredSymbols = symbolsOnly.filter({ (symbol) -> Bool in
-            let mainKeyword: NSString = symbol.mainKeyword
-            let found = (mainKeyword.rangeOfString(searchString!, options: NSStringCompareOptions.CaseInsensitiveSearch).location) != NSNotFound
-            return found
-            
-        })
-        filtered = sectionSymbols(filteredSymbols)!
-        
-        if filtered.count == 0 || searchText.isEmpty {
-            searchActive = false
-        } else {
-            searchActive = true
-        }
-        self.tableView.reloadData()
-    }
- */
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
